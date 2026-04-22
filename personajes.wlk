@@ -13,8 +13,10 @@ import elementos.*
 // JUGADORES
 
 object luisa {
-  const personajeActivo = mario
-  method aparece(_elemento) {personajeActivo.encontrar(_elemento)}
+  var personajeActivo = mario
+  method personajeActivo(_personaje) { personajeActivo = _personaje }
+  method personajeActivo() = personajeActivo
+  method aparece(_elemento) { personajeActivo.encontrar(_elemento) }
 }
 
 // PERSONAJES
@@ -40,6 +42,6 @@ object mario {
   }
   method ultimoElementoEncontrado() {return ultimoElemento}
   method esFeliz() =   
-      valorRecolectado > 50 || ultimoElemento.altura() > 10
+      valorRecolectado >= 50 || ultimoElemento.altura() >= 10
   method valorRecolectado() = valorRecolectado
 }

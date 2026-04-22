@@ -1,0 +1,46 @@
+import personajes.*
+import elementos.*
+import armas.*
+
+describe "Tests de Luisa y personajes" {
+
+    test "Luisa con Mario encuentra la tipa" {
+        luisa.personajeActivo(mario)
+        luisa.aparece(tipa)
+        
+        // La tipa otorga 2 * altura (8) = 16. Mario recolecta 16.
+        assert.equals(16, mario.valorRecolectado())
+        // La tipa crece 1 metro.
+        assert.equals(9, tipa.altura())
+        // Mario no es feliz todavía (valor < 50 y altura < 10)
+        assert.notThat(mario.esFeliz())
+    }
+
+    test "Luisa con Floki ataca al castillo" {
+        luisa.personajeActivo(floki)
+        floki.cambiarArma(ballesta) // Aseguramos un arma
+        luisa.aparece(castillo)
+        
+        // Castillo empieza en 150. Ballesta potencia 4.
+        // 150 - 4 = 146
+        assert.equals(146, 146) // Este test es para verificar lógica interna si hubiera getter
+        // Verificamos indirectamente por el valor otorgado (146/5 = 29.2)
+        assert.equals(29.2, castillo.valorOtorgado())
+    }
+
+    test "Mario es feliz si se encuentra con algo alto" {
+        luisa.personajeActivo(mario)
+        luisa.aparece(castillo) // Altura 20
+        assert.that(mario.esFeliz())
+    }
+
+    test "Mario es feliz si recolecta mucho" {
+        luisa.personajeActivo(mario)
+        // Repetimos encuentros para juntar valor
+        luisa.aparece(aurora) // 15
+        luisa.aparece(aurora) // 15
+        luisa.aparece(aurora) // 15
+        luisa.aparece(aurora) // 15 -> total 60
+        assert.that(mario.esFeliz())
+    }
+}

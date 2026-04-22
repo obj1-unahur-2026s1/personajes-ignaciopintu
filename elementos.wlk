@@ -14,7 +14,7 @@ object aurora {
     var     estaViva = true
     method  altura() = 1
     method  recibirAtaque(_potenciaAtaque) {
-        if (_potenciaAtaque > 10) {estaViva = false}
+        if (_potenciaAtaque >= 10) {estaViva = false}
     }
     method estaViva() = estaViva
     method valorOtorgado() = 15
